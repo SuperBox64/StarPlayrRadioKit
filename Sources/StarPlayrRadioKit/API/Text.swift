@@ -8,6 +8,8 @@ internal func TextSync(endpoint: String, TextHandler: @escaping TextHandler) {
 
     var urlReq = URLRequest(url: url)
     urlReq.httpMethod = "GET"
+    urlReq.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+    urlReq.addValue("application/json", forHTTPHeaderField: "Content-Type")
     urlReq.timeoutInterval = TimeInterval(60)
     urlReq.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
     

@@ -80,7 +80,11 @@ func playlistRoute() -> httpReq {{ request in
         }
         
         if !playlist.isEmpty {
-            return HttpResponse.ok(.ping(playlist, contentType: "application/x-mpegURL"))
+            // Use the new hlsPlaylist response type for better HLS streaming support
+            return HttpResponse.ok(.ping(playlist), [
+                "X-Channel-ID": userX.channel,
+                "X-Playlist-Version": "3"
+            ])
         } else {
             return HttpResponse.notFound(.none)
         }

@@ -19,6 +19,8 @@ func channelsRoute() -> httpReq {{ request in
                 let returnData = processChannels(result: result)
                 if returnData.success { storeCookiesX() }
                 
+               /// print("returnData", returnData)
+            
                 obj = ["data": returnData.data, "message": returnData.message, "success": returnData.success, "categories": returnData.categories] as [String : Any]
                 
             } else {

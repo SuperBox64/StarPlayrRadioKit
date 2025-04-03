@@ -18,8 +18,12 @@ func loginRoute() -> httpReq {{ request in
             let pass = json?["pass"] as? String
         else {
             let object = ["data": "Failed to login.", "message": "Login failure.", "success": false] as [String : Any]
-            let data = try! JSONSerialization.data(withJSONObject: object)
-            return HttpResponse.ok(.data(data, contentType: "application/json"))
+            if let data = try? JSONSerialization.data(withJSONObject: object) {
+                return HttpResponse.ok(.data(data, contentType: "application/json"))
+            }
+            
+            // return blank if nothing to return
+            return HttpResponse.ok(.data(Data(), contentType: "application/json"))
         }
         
         let login = LoginX(username: user, pass: pass)

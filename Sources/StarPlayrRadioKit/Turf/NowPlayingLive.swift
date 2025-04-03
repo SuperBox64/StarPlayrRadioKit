@@ -13,6 +13,8 @@ internal func nowPlayingLiveAsync(endpoint: String, LiveHandler: @escaping LiveH
     let decoder = JSONDecoder()
     var urlReq = URLRequest(url: url)
     urlReq.httpMethod = "GET"
+    urlReq.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+    urlReq.addValue("application/json", forHTTPHeaderField: "Content-Type")
     urlReq.timeoutInterval = TimeInterval(60)
     
     let task = URLSession.shared.dataTask(with: urlReq ) { data, r, e  in

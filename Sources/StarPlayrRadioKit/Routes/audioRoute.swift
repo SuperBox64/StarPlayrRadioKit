@@ -17,7 +17,7 @@ func audioRoute() -> httpReq {{ request in
             return HttpResponse.notFound(.none)
         }
         
-        let endpoint = AudioX(data: aac, channelId: userX.channel )
+        let endpoint = AudioX(data: aac, channelId: userX.channel)
         
         var audio = Data()
         
@@ -36,6 +36,10 @@ func audioRoute() -> httpReq {{ request in
             return HttpResponse.notFound(.none)
         }
         
-        return HttpResponse.ok(.data(audio, contentType: audioFormat))
+        // Use the optimized audioStream response type for better streaming performance
+        return HttpResponse.ok(.data(audio, contentType: audioFormat), [
+            "X-Channel-ID": userX.channel,
+            "X-Content-Length": String(audio.count)
+        ])
     }
 }}

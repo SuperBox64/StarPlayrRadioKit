@@ -9,9 +9,13 @@ import Foundation
 import SwifterLite
 
 public func startServer(_ port: UInt16) {
-    let server = streamingServer()
-    try? server.start(port)
-    print("Server has started on port \(port)")
+    var server = streamingServer()
+    
+    Task {
+        try? server.start(port)
+        print("Server has started on port \(port)")
+    }
+
 }
 
 //MARK: Swifter Embedded Web Server Routes

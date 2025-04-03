@@ -1,6 +1,5 @@
 //
 //  DataAsync.swift
-//  CameoKit
 //
 //  Created by Todd on 4/18/20.
 //
@@ -16,6 +15,8 @@ internal func dataSync(endpoint: String, method: String, DataHandler: @escaping 
 
     var urlReq = URLRequest(url: url)
     urlReq.httpMethod = "GET"
+    urlReq.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+    urlReq.addValue("application/json", forHTTPHeaderField: "Content-Type")
     urlReq.timeoutInterval = TimeInterval(60)
     urlReq.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
     
