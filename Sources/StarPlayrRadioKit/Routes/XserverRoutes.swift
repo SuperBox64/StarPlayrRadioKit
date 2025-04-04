@@ -9,7 +9,7 @@ import Foundation
 import SwifterLite
 
 public func startServer(_ port: UInt16) {
-    var server = streamingServer()
+    let server = streamingServer()
     
     Task {
         try? server.start(port)
